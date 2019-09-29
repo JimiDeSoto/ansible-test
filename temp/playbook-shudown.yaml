@@ -1,8 +1,11 @@
 -
     name: 'Shutdown infrastructure'
+    become:
+    become_method: sudo
     hosts: all
     tasks:
         -
             name: 'Execute a shutdown command'
-            command: /usr/sbin/shutdown now
+            command: /usr/sbin/shutdown -h now
+            ignore_errors: yes
 #end
