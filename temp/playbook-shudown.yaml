@@ -1,0 +1,8 @@
+-
+    name: 'Shutdown infrastructure'
+    hosts: all
+    tasks:
+        -
+            name: 'Execute a shutdown command'
+            command: /usr/sbin/shutdown now
+#end
