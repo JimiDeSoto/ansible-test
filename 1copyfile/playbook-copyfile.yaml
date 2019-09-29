@@ -5,4 +5,5 @@
     - name: Copy file
       copy:
         src: /tmp/test-file.txt
-        dst: /tmp/test-file.txt
+        dest: /tmp/test-file.txt
+#end
