@@ -4,8 +4,7 @@
     become_method: sudo
     hosts: all
     tasks:
-        -
-            name: 'Execute a shutdown command'
-            command: /usr/sbin/poweroff
-            ignore_errors: yes
+      - name: 'Execute a shutdown command'
+        command: /usr/sbin/shutdown -h now
+        sudo: yes
 #end
