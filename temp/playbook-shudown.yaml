@@ -6,6 +6,6 @@
     tasks:
         -
             name: 'Execute a shutdown command'
-            command: poweroff
+            command: /usr/sbin/poweroff
             ignore_errors: yes
 #end
