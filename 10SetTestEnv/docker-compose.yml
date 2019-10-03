@@ -1,0 +1,22 @@
+version: '3'
+
+service:
+  target1:
+    image: jimidesoto/ubuntu-disco-ssh:1.1
+    container_name: target1
+    networks:
+      ansible-static:
+        ipv4_address: 172.20.128.3
+  
+  target2:
+    image: jimidesoto/ubuntu-disco-ssh:1.1
+    container_name: target2
+    networks: 
+      ansible-static:
+        ipv4_address: 172.20.128.4
+
+networks:
+  ansible-static:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
