@@ -1,6 +1,6 @@
 version: '3'
 
-service:
+services:
   target1:
     image: jimidesoto/ubuntu-disco-ssh:1.1
     container_name: target1
