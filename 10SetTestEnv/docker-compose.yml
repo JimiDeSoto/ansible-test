@@ -7,6 +7,10 @@ services:
     networks:
       ansible-static:
         ipv4_address: 172.20.128.2
+    volumes:
+      - type: bind
+        source: ./share
+        target: /share
 
   target1:
     image: jimidesoto/ubuntu-disco-ssh:1.4
