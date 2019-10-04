@@ -5,16 +5,19 @@
 FROM ubuntu:19.04
 
 ARG SECRET
-RUN deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main && \
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+#RUN deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main && \
+#apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 RUN apt-get update &&  \
   apt-get install -y --no-install-recommends\
+  software-properties-common \
   openssh-server \
   mc \
   vim \
   curl \
-  inetutils-ping \
+  inetutils-ping &&\
+  apt-add-repository --yes --update ppa:ansible/ansible && \
+  apt-get install -y --no-install-recommends\
   ansible \
   && rm -rf /var/lib/apt/lists/*
   
