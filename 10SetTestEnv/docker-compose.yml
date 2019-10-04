@@ -1,6 +1,13 @@
 version: '3'
 
 services:
+  ansiblecontroller:
+    image: jimidesoto/ansible-controller:1.0
+    container_name: controller
+    networks:
+      ansible-static:
+        ipv4_address: 172.20.128.2
+
   target1:
     image: jimidesoto/ubuntu-disco-ssh:1.4
     container_name: target1
