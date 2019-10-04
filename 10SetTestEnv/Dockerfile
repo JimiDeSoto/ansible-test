@@ -2,6 +2,8 @@
 
 FROM ubuntu:19.04
 
+ARG SECRET
+
 RUN apt-get update &&  \
   apt-get install -y --no-install-recommends\
   openssh-server \
@@ -11,7 +13,7 @@ RUN apt-get update &&  \
   && rm -rf /var/lib/apt/lists/*
   
 RUN mkdir /var/run/sshd
-RUN echo 'root:OlaBoga11' | chpasswd
+RUN echo 'root:'$SECRET | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
