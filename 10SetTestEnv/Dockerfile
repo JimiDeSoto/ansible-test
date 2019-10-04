@@ -12,6 +12,7 @@ RUN apt-get update &&  \
   mc \
   vim \
   curl \
+  inetutils-ping \
   && rm -rf /var/lib/apt/lists/*
   
 RUN mkdir /var/run/sshd
