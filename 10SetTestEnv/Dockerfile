@@ -1,4 +1,6 @@
 #Ansible target servers
+#docker build --build-arg SECRET=pass -t
+
 
 FROM ubuntu:19.04
 
