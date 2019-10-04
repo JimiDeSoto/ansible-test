@@ -2,7 +2,14 @@
 
 FROM ubuntu:19.04
 
-RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-server && apt-get install -y  mc
+RUN apt-get update &&  \
+  apt-get install -y --no-install-recommends\
+  openssh-server \
+  mc \
+  vim \
+  curl \
+  && rm -rf /var/lib/apt/lists/*
+  
 RUN mkdir /var/run/sshd
 RUN echo 'root:OlaBoga11' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
