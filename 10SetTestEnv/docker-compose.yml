@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   ansiblecontroller:
-    image: jimidesoto/ansible-controller:1.1
+    image: jimidesoto/ansible-controller:1.2
     container_name: controller
     networks:
       ansible-static:
