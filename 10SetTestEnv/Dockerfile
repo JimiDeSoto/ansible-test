@@ -13,8 +13,9 @@ RUN apt-get update &&  \
   vim \
   curl \
   inetutils-ping \
+  python-pip \
   && rm -rf /var/lib/apt/lists/*
-  
+RUN pip install "pywinrm>=0.3.0"
 RUN mkdir /var/run/sshd && mkdir /share
 RUN echo 'root:'$SECRET | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
