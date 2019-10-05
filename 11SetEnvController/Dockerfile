@@ -19,8 +19,10 @@ RUN apt-get update &&  \
   apt-add-repository --yes --update ppa:ansible/ansible && \
   apt-get install -y --no-install-recommends\
   ansible \
+  python-pip \
   && rm -rf /var/lib/apt/lists/*
-  
+
+RUN pip install -U setuptools wheel && pip install "pywinrm>=0.3.0"
 RUN mkdir /var/run/sshd
 RUN echo 'root:'$SECRET | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
