@@ -38,7 +38,6 @@
     - name: Ensure mysql root password is updated for all root accounts
       mysql_user:
         name: root
-        host: "{{ item }}"
         login_unix_socket: /var/run/mysqld/mysqld.sock
         password: Passw0rd
         priv: '*.*:ALL,GRANT'
