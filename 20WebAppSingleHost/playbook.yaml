@@ -10,6 +10,7 @@
           - python-dev
           - build-essential
           - python-pip
+          - python3-pip
           - python-mysqldb
           - mysql-server
           - mysql-client
