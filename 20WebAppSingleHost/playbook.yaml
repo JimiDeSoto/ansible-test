@@ -4,13 +4,13 @@
     - name: Install dependencies
       apt:
         name:
-          - python3
-          - python3-apt
-          - python3-setuptools
-          - python3-dev
+          - python
+          - python-apt
+          - python-setuptools
+          - python-dev
           - build-essential
-          - python3-pip
-          - python3-mysqldb
+          - python-pip
+          - python-mysqldb
           - mysql-server
           - mysql-client
         state: present
@@ -23,13 +23,15 @@
         enabled: yes
       become: yes
 
-    - name: Install Python Flask dependencies
-      pip:
-        name: "{{item}}"
-        state: present
-      with_items: 
-          - flask
-          - flask-mysql
+    - name: Run command to install Flask
+      command: /usr/bin/pip install flask flask-mysql
+    #- name: Install Python Flask dependencies
+    #  pip:
+    #    name: "{{item}}"
+    #    state: present
+    #  with_items: 
+    #      - flask
+    #      - flask-mysql
 
     - name: Ensure mysql root password is updated for all root accounts
       mysql_user:
