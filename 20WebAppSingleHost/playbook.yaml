@@ -14,7 +14,6 @@
           - mysql-server
           - mysql-client
         state: present
-        autoclean: yes
       become: yes
 
     - name: Start MySQL service
