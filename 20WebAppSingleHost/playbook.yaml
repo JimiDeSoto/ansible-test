@@ -12,7 +12,7 @@
           - python-mysqldb
           - mysql-server
           - mysql-client
-        state: latest
+        state: present
         autoclean: yes
       become: yes
 
