@@ -15,21 +15,15 @@
           - mysql-client
         state: present
       become: yes
-
-    - name: Start MySQL service
-      service:
-        name: mysql
-        state: started
-        enabled: yes
+    
+    #- name: Run command to install Flask
+    #  command: /usr/bin/pip install flask flask-mysql
+    #  become: yes
+    - name: Install Python Flask dependencies
+      pip:
+        name:
+          - flask
+          - flask-mysql
+        state: present
       become: yes
-
-    - name: Run command to install Flask
-      command: /usr/bin/pip install flask flask-mysql
-      become: yes
-    #- name: Install Python Flask dependencies
-    #  pip:
-    #    name: "{{item}}"
-    #    state: present
-    #  with_items: 
-    #      - flask
-    #      - flask-mysql
+          
