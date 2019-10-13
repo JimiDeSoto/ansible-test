@@ -9,7 +9,7 @@
           - python-setuptools
           - python-dev
           - build-essential
-          #- python-pip
+          - python-pip
           - python-mysqldb
           - mysql-server
           - mysql-client
@@ -22,9 +22,6 @@
         state: started
         enabled: yes
       become: yes
-
-    - name: install pip
-      action: easy_install name=pip
 
     - name: install various libraries with pip
       action: pip name=$item state=present
