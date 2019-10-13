@@ -46,6 +46,7 @@
 
     - name: Create App Database
       mysql_db: name=employee_db state=present
+      login_unix_socket: /var/run/mysqld/mysqld.sock
       become: yes
 
     - name: Copy source code
