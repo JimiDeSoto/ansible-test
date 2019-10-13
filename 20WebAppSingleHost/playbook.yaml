@@ -67,7 +67,18 @@
         name: employee_db
         state: present
       become: yes
-      
+    
+    - name: Copy database dump file
+      copy:
+        src: import.sql
+        dest: /tmp/import.sql
+    
+    - name: import SQL
+      mysql_db:
+        name: employee_db
+        state: import
+        target: /tmp/import.sql
+          
     - name: Copy source code
       copy: src=app.py dest=/opt/app.py
       become: yes
