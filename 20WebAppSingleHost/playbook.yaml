@@ -10,22 +10,26 @@
         - build-essential
         - python-pip
         - python-mysqldb
+      become: yes
 
     - name: Install MySQL
       apt: name={{ item }} state=installed
       with_items:
         - mysql-server
         - mysql-client
+      become: yes
 
     - name: Start MySQL service
       service:
         name: mysql
         state: started
         enabled: yes
+      become: yes
 
     - name: Create App Database
       mysql_db: name=employee_db state=present
-      
+      become: yes
+
     - name: Create db User
       mysql_user:
         name: db_user
@@ -33,6 +37,7 @@
         priv: '*.*:ALL'
         state: present
         host: '%'
+      become: yes
 
     - name: Install Python Flask dependencies
       pip:
@@ -41,12 +46,15 @@
       with_items:
         - flask
         - flask-mysql
+      become: yes
 
     - name: Copy source code
       copy: src=app.py dest=/opt/app.py
-    
+      
+
     - name: Start web server
       shell: FLASK_APP=app.py nohup flask run --host=0.0.0.0 &
+      
 
 
 
