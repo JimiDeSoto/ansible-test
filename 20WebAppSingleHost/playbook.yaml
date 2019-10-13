@@ -5,6 +5,7 @@
       apt:
         name:
           - python
+          - python-apt
           - python-setuptools
           - python-dev
           - build-essential
