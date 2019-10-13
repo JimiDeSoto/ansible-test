@@ -36,7 +36,7 @@
 
     - name: Install Python Flask dependencies
       pip:
-        name: {{ item }}
+        name: '{{ item }}'
         satate: present
       with_items:
         - flask
