@@ -25,6 +25,7 @@
 
     - name: Run command to install Flask
       command: /usr/bin/pip install flask flask-mysql
+      become: yes
     #- name: Install Python Flask dependencies
     #  pip:
     #    name: "{{item}}"
@@ -84,6 +85,7 @@
 
     - name: Start web server
       shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &
+      become: yes
       
 
 
