@@ -38,7 +38,7 @@
     - name: Install Python Flask dependencies
       pip:
         name: '{{ item }}'
-        satate: present
+        state: present
       with_items:
         - flask
         - flask-mysql
@@ -47,7 +47,7 @@
     - name: Create App Database
       mysql_db: name=employee_db state=present
       become: yes
-      
+
     - name: Copy source code
       copy: src=app.py dest=/opt/app.py
       
