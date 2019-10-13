@@ -2,21 +2,18 @@
   hosts: db_and_web_server1, db_and_web_server2
   tasks:
     - name: Install dependencies
-      apt: name={{item}} state=present
-      with_items:
-        - python
-        - python-setuptools
-        - python-dev
-        - build-essential
-        - python-pip
-        - python-mysqldb
-      become: yes
-
-    - name: Install MySQL
-      apt: name={{ item }} state=present
-      with_items:
-        - mysql-server
-        - mysql-client
+      apt:
+        name:
+          - python
+          - python-setuptools
+          - python-dev
+          - build-essential
+          - python-pip
+          - python-mysqldb
+          - mysql-server
+          - mysql-client
+        state: latest
+        autoclean: yes
       become: yes
 
     - name: Start MySQL service
@@ -28,11 +25,10 @@
     
     - name: Install Python Flask dependencies
       pip:
-        name: '{{ item }}'
+        name:
+          - flask
+          - flask-mysql
         state: present
-      with_items:
-        - flask
-        - flask-mysql
       become: yes
 
     - name: Ensure mysql root password is updated for all root accounts
