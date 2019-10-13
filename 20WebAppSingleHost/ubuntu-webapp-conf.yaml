@@ -1,0 +1,55 @@
+- name: Deploy web app
+  hosts: db_and_web_server1, db_and_web_server2
+  tasks:
+    - name: Ensure mysql root password is updated for all root accounts
+      mysql_user:
+        name: root
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        password: Passw0rd
+        priv: '*.*:ALL,GRANT'
+        check_implicit_admin: true
+      become: yes
+      
+    - name: Create `/root/.my.cnf`  with root password credentials
+      template:
+        src:  my.cnf.j2
+        dest: /root/.my.cnf
+        owner: root
+        mode: 0600
+      become: yes
+          
+    - name: Create db User
+      mysql_user:
+        name: db_user
+        password: Passw0rd
+        priv: '*.*:ALL'
+        state: present
+        host: '%'
+      become: yes
+
+    - name: Create App Database
+      mysql_db:
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        name: employee_db
+        state: present
+      become: yes
+    
+    - name: Copy database dump file
+      copy:
+        src: import.sql
+        dest: /tmp/import.sql
+          
+    - name: import SQL
+      mysql_db:
+        name: employee_db
+        state: import
+        target: /tmp/import.sql
+      become: yes
+          
+    - name: Copy source code
+      copy: src=app.py dest=/opt/app.py
+      become: yes
+
+    - name: Start web server
+      shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &
+      become: yes

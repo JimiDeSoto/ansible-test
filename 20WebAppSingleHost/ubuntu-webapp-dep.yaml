@@ -1,0 +1,35 @@
+- name: Deploy web app
+  hosts: db_and_web_server1, db_and_web_server2
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - python
+          - python-apt
+          - python-setuptools
+          - python-dev
+          - build-essential
+          - python-pip
+          - python-mysqldb
+          - mysql-server
+          - mysql-client
+        state: present
+      become: yes
+
+    - name: Start MySQL service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: Run command to install Flask
+      command: /usr/bin/pip install flask flask-mysql
+      become: yes
+    #- name: Install Python Flask dependencies
+    #  pip:
+    #    name: "{{item}}"
+    #    state: present
+    #  with_items: 
+    #      - flask
+    #      - flask-mysql
